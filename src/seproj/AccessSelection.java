@@ -23,7 +23,7 @@ import javax.swing.GroupLayout.Alignment;
 import net.miginfocom.swing.MigLayout;
 import javax.swing.SpringLayout;
 import javax.swing.UIManager;
-
+import javax.swing.UIManager.*;
 public class AccessSelection {
 
 	private JFrame frame;
@@ -35,6 +35,20 @@ public class AccessSelection {
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
+				
+				try {
+				    for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
+				        if ("Nimbus".equals(info.getName())) {
+				            UIManager.setLookAndFeel(info.getClassName());
+				            break;
+				        }
+				    }
+				} catch (Exception e) {
+				    // If Nimbus is not available, you can set the GUI to another look and feel.
+				}
+				
+				
+				
 				try {
 					AccessSelection window = new AccessSelection();
 					window.frame.setVisible(true);
@@ -81,11 +95,7 @@ public class AccessSelection {
 		springLayout.putConstraint(SpringLayout.WEST, btnConfirm, 0, SpringLayout.WEST, rdbtnStudent);
 		frame.getContentPane().add(btnConfirm);
 		
-		try { 
-		    UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-		} catch (Exception e) {
-		    e.printStackTrace();
-		}
+	
 		btnConfirm.addActionListener(new ActionListener() {
 			
 			@Override
